@@ -13,4 +13,6 @@ func SetupPlantasRoutes(r *gin.Engine, db *sql.DB) {
 	r.POST("/plantas", deps.PlantaCreateController.Create)
 	r.PUT("/plantas", deps.PlantaUpdateController.Update)
 	r.DELETE("/plantas/:id", deps.PlantaDeleteController.Delete)
+	r.GET("/plantas/nuevas", deps.PlantaViewController.GetNewPlants)
+
 }

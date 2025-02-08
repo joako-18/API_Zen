@@ -45,3 +45,17 @@ func (r *ViveroRepository) Delete(id int) error {
 	_, err := r.db.Exec("DELETE FROM viveros WHERE id=?", id)
 	return err
 }
+
+// Función para replicar viveros (inserta o actualiza)
+func (r *ViveroRepository) ReplicateViveros(viveros []entities.Vivero) error {
+	for _, v := range viveros {
+		_, err := r.db.Exec(
+			"INSERT INTO viveros (id, nombre, descripcion, direccion) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE nombre=?, descripcion=?, direccion=?",
+			v.ID, v.Nombre, v.Descripcion, v.Direccion, v.Nombre, v.Descripcion, v.Direccion,
+		)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}

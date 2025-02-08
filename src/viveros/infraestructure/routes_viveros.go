@@ -7,10 +7,12 @@ import (
 )
 
 func SetupViverosRoutes(r *gin.Engine, db *sql.DB) {
+
 	deps := SetupViveroDependencies(db)
 
 	r.GET("/viveros", deps.ViewViverosController.GetAll)
 	r.POST("/viveros", deps.CreateViveroController.Create)
 	r.PUT("/viveros/:id", deps.UpdateViveroController.Update)
 	r.DELETE("/viveros/:id", deps.DeleteViveroController.Delete)
+	r.POST("/viveros/replicar", deps.ReplicateViverosController.Replicate)
 }
