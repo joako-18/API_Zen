@@ -3,6 +3,7 @@ package src
 import (
 	"log"
 
+	core "api/core"
 	plantasInfra "api/src/plantas/infraestructure"
 	viverosInfra "api/src/viveros/infraestructure"
 
@@ -11,7 +12,6 @@ import (
 )
 
 func Run() {
-
 	err := godotenv.Load()
 	if err != nil {
 		log.Println("No se pudo cargar el archivo .env, usando valores predeterminados")
@@ -19,10 +19,7 @@ func Run() {
 
 	r := gin.Default()
 
-	db, err := plantasInfra.ConnectDB()
-	if err != nil {
-		log.Fatal("Error al conectar con la base de datos:", err)
-	}
+	db := core.GetDBInstance()
 
 	plantasInfra.SetupPlantasRoutes(r, db)
 	viverosInfra.SetupViverosRoutes(r, db)

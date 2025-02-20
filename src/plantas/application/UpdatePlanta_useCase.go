@@ -9,7 +9,6 @@ type PlantaUpdateUseCase struct {
 	repo *repositories.PlantaRepository
 }
 
-// Constructor para PlantaUpdateUseCase
 func NewPlantaUpdateUseCase(repo *repositories.PlantaRepository) *PlantaUpdateUseCase {
 	return &PlantaUpdateUseCase{repo: repo}
 }

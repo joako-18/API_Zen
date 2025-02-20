@@ -46,7 +46,6 @@ func (r *ViveroRepository) Delete(id int) error {
 	return err
 }
 
-// Función para replicar viveros (inserta o actualiza)
 func (r *ViveroRepository) ReplicateViveros(viveros []entities.Vivero) error {
 	for _, v := range viveros {
 		_, err := r.db.Exec(

@@ -15,7 +15,6 @@ func NewReplicateViverosController(useCase *application.ReplicateViverosUseCase)
 	return &ReplicateViverosController{useCase: useCase}
 }
 
-// Endpoint para iniciar la replicación manualmente
 func (c *ReplicateViverosController) Replicate(cxt *gin.Context) {
 	err := c.useCase.Replicate()
 	if err != nil {

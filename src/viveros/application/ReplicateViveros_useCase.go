@@ -42,7 +42,6 @@ func (u *ReplicateViverosUseCase) FetchNewViveros() ([]entities.Vivero, error) {
 	return viveros, nil
 }
 
-// Replicate los viveros nuevos en la base de datos
 func (u *ReplicateViverosUseCase) Replicate() error {
 	viveros, err := u.FetchNewViveros()
 	if err != nil {
@@ -53,7 +52,7 @@ func (u *ReplicateViverosUseCase) Replicate() error {
 		if err := u.repo.ReplicateViveros(viveros); err != nil {
 			return err
 		}
-		u.lastUpdated = time.Now().Format("2006-01-02 15:04:05") // Actualiza el timestamp
+		u.lastUpdated = time.Now().Format("2006-01-02 15:04:05")
 	}
 	return nil
 }
