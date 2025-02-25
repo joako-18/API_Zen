@@ -1,4 +1,4 @@
-package models
+package entities
 
 type Planta struct {
 	ID     int    `json:"id"`

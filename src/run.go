@@ -3,7 +3,7 @@ package src
 import (
 	"log"
 
-	core "api/core"
+	core "api/src/core"
 	plantasInfra "api/src/plantas/infraestructure"
 	viverosInfra "api/src/viveros/infraestructure"
 

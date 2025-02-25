@@ -1,8 +1,8 @@
 package repositories
 
 import (
-	"api/src/plantas/domain/entities"
 	"database/sql"
+	"replica/src/planta/domain/entities"
 	"time"
 )
 
