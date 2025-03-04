@@ -3,7 +3,8 @@ package repositories
 import (
 	"api/src/plantas/domain/entities"
 	"database/sql"
-	"time"
+	"errors"
+	"fmt"
 )
 
 type PlantaRepository struct {
@@ -47,21 +48,29 @@ func (r *PlantaRepository) Delete(id int) error {
 	return err
 }
 
-func (r *PlantaRepository) GetLatestUpdate() ([]entities.Planta, time.Time, error) {
-	rows, err := r.db.Query("SELECT id, nombre, tipo, riego, updated_at FROM plantas ORDER BY updated_at DESC LIMIT 1")
-	if err != nil {
-		return nil, time.Time{}, err
-	}
-	defer rows.Close()
+func (r *PlantaRepository) GetById(id int) (*entities.Planta, error) {
+	var planta entities.Planta
 
-	var plantas []entities.Planta
-	var lastUpdate time.Time
-	for rows.Next() {
-		var p entities.Planta
-		if err := rows.Scan(&p.ID, &p.Nombre, &p.Tipo, &p.Riego, &lastUpdate); err != nil {
-			return nil, time.Time{}, err
+	query := "SELECT id, nombre, riego FROM plantas WHERE id = ?"
+	row := r.db.QueryRow(query, id)
+
+	err := row.Scan(&planta.ID, &planta.Nombre, &planta.Riego)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.New("planta no encontrada")
 		}
-		plantas = append(plantas, p)
+		return nil, err
 	}
-	return plantas, lastUpdate, nil
+
+	return &planta, nil
+}
+
+func (r *PlantaRepository) GetNewPlantasCount() (int, error) {
+	var count int
+	query := "SELECT COUNT(*) FROM plantas WHERE created_at > NOW() - INTERVAL 5 SECOND"
+	err := r.db.QueryRow(query).Scan(&count)
+	if err != nil {
+		return 0, fmt.Errorf("error al ejecutar la consulta: %w", err)
+	}
+	return count, nil
 }
