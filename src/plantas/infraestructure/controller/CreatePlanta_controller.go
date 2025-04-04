@@ -22,6 +22,12 @@ func (h *PlantaCreateController) Create(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	h.useCase.Create(planta)
+
+	err := h.useCase.Create(planta)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
 	c.JSON(http.StatusCreated, planta)
 }

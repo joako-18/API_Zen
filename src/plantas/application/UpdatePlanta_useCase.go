@@ -6,10 +6,10 @@ import (
 )
 
 type PlantaUpdateUseCase struct {
-	repo *repositories.PlantaRepository
+	repo repositories.PlantaRepository
 }
 
-func NewPlantaUpdateUseCase(repo *repositories.PlantaRepository) *PlantaUpdateUseCase {
+func NewPlantaUpdateUseCase(repo repositories.PlantaRepository) *PlantaUpdateUseCase {
 	return &PlantaUpdateUseCase{repo: repo}
 }
 

@@ -3,10 +3,10 @@ package application
 import "api/src/plantas/domain/repositories"
 
 type PlantaDeleteUseCase struct {
-	repo *repositories.PlantaRepository
+	repo repositories.PlantaRepository
 }
 
-func NewPlantaDeleteUseCase(repo *repositories.PlantaRepository) *PlantaDeleteUseCase {
+func NewPlantaDeleteUseCase(repo repositories.PlantaRepository) *PlantaDeleteUseCase {
 	return &PlantaDeleteUseCase{repo: repo}
 }
 

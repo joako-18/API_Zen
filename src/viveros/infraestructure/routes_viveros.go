@@ -14,5 +14,4 @@ func SetupViverosRoutes(r *gin.Engine, db *sql.DB) {
 	r.POST("/viveros", deps.CreateViveroController.Create)
 	r.PUT("/viveros/:id", deps.UpdateViveroController.Update)
 	r.DELETE("/viveros/:id", deps.DeleteViveroController.Delete)
-	r.POST("/viveros/replicar", deps.ReplicateViverosController.Replicate)
 }
