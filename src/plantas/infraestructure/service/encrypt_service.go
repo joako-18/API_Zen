@@ -24,7 +24,6 @@ func NewEncryptService(secretKey string) (*EncryptService, error) {
 }
 
 func (e *EncryptService) Encrypt(data string) (string, error) {
-	// Crear un bloque de cifrado AES
 	block, err := aes.NewCipher(e.secretKey)
 	if err != nil {
 		return "", err
